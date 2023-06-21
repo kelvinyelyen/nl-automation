@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Register
+    Register
 {% endblock %}
 
 {% block main %}
@@ -15,7 +15,7 @@ Register
                         <div class="d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form>
+                                <form action="/register" method="post">
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                         <span class="h1 fw-bold mb-0">Logo</span>
@@ -25,32 +25,50 @@ Register
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label fw-medium" for="form2Example17">Email</label>
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" />
+                                        <input name="email" type="email" id="form2Example17"
+                                            class="form-control form-control-lg fs-6" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label fw-medium" for="form2Example17">Username</label>
-                                        <input type="email" id="form2Example17" class="form-control form-control-lg" />
+                                        <input name="username" type="text" id="form2Example17"
+                                            class="form-control form-control-lg fs-6" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label fw-medium" for="form2Example27">Password</label>
-                                        <input type="password" id="form2Example27"
-                                            class="form-control form-control-lg" />
+                                        <input name="password" type="password" id="form2Example27"
+                                            class="form-control form-control-lg fs-6" />
+                                    </div>
 
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-medium" for="form2Example27">Confirm
+                                            Password</label>
+                                        <input name="confirmation" type="password" id="form2Example27"
+                                            class="form-control form-control-lg fs-6" />
                                     </div>
 
                                     <div class="pt-1 mb-4 ">
-                                        <button class="btn btn-dark btn-lg btn-block fs-6" type="button">Sign up</button>
+                                        <button class="btn btn-dark btn-lg btn-block fs-6" type="submit">Sign
+                                            up</button>
                                     </div>
 
                                     <a class="small text-muted" href="#!">Forgot password?</a>
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Create a free account or <a href="/login"
-                                            style="color: #393f81;">Log in</a></p>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Create a free account or <a
+                                            href="/login" style="color: #393f81;">Log in</a></p>
                                     <a href="#!" class="small text-muted">Terms of use.</a>
                                     <a href="#!" class="small text-muted">Privacy policy</a>
                                 </form>
 
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                <ul class="flash-messages">
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                                {% endwith %}
                             </div>
                         </div>
                     </div>

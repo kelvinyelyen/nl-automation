@@ -1,3 +1,17 @@
 body {
-    font-family: 'Satoshi', sans-serif;
+  font-family: "Satoshi", sans-serif;
+}
+
+ul.flash-messages {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.flash-messages li {
+  margin-bottom: 10px;
+  color: red; /* Or choose your desired color */
+}
+
+.welcome {
+  font-family: "CatShop", sans-serif;
 }
