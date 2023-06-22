@@ -1,38 +1,67 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Subscribe
+Engage Your Audience
 {% endblock %}
 
 {% block main %}
 <div class="container">
-    <nav class="navbar navbar-expand-lg bg-light mb-5">
+    <nav class="navbar navbar-expand-lg mb-5">
         <div class="container">
-            <a class="navbar-brand" href="#">LOGO</a>
+            <a class="navbar-brand font2" href="#">mailMagnet</a>
 
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto justify-content-end">
+            <div class="" id="navbarText">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Audience</a>
+                        <a class="nav-link active" aria-current="page" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Create</a>
-                    </li>
-                    <li class="nav-item">
-                        {% if email %}
-                        <a class="nav-link" href="/logout">
-                            Logout ({{ email }})
-                        </a>
-                        {% endif %}
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    {% if username %}
-    <h1 class="welcome">Welcome, {{ username }}!</h1>
-    {% endif %}
-    <p>Share your narrative, connect with people, and extend your reach.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="font2 intro">Welcome to MailMagnet</h1>
+
+            </div>
+            <div class="col-md-6">
+                <h6 class="mb-4">Supercharge your creativity and captivate your subscribers <br> with compelling writing
+                    and innovative ideas. MailMagnet<br> is the Ultimate Mininal
+                    Solution for Engaging with Your<br> Audience.</h6>
+                <a href="/register" class="btn btn-dark btn-lg btn-block fs-6">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mb-5 mb">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-height">
+                    <div class="h-100">
+                        <img src="../static/img/img3.jpg" class="card-img rounded-5" alt="Card Image"
+                            style="object-fit: cover; height: 100%;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card card-height">
+                    <div class="h-100">
+                        <img src="../static/img/img2.jpg" class="card-img rounded-5" alt="Card Image"
+                            style="object-fit: cover; height: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
 
 {% endblock %}

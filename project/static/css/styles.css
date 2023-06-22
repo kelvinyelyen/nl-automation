@@ -12,6 +12,56 @@ ul.flash-messages li {
   color: red; /* Or choose your desired color */
 }
 
-.welcome {
+a {
+  text-decoration: none;
+}
+
+.font2 {
   font-family: "CatShop", sans-serif;
 }
+
+.welcome {
+  font-size: 50px;
+}
+
+.custom-color1 {
+  background-color: #f6f6f4;
+}
+
+.custom-color2 {
+  background-color: hsl(302, 46%, 89%);
+}
+
+.custom-color3 {
+  background-color: #000000;
+}
+
+.card-title {
+  font-family: "CatShop", sans-serif;
+  font-size: 40px;
+}
+
+.email-image {
+  width: 10%;
+  height: auto;
+}
+
+.mx {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.intro {
+  font-size: 80px;
+  line-height: 100%;
+}
+
+.mb {
+  margin-top: 30px;
+}
+
+.card-height {
+  height: 350px; 
+  border: none;
+}
+

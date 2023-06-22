@@ -30,6 +30,11 @@ class User(db.Model):
         self.email = email
         self.password = generate_password_hash(password)
 
+class Subscriber(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    user_id = db.Column(db.String(50), nullable=False) 
+   
 
 @app.after_request
 def after_request(response):
@@ -42,15 +47,19 @@ def after_request(response):
 
 @app.route("/")
 def index():
+    return render_template("index.html")
+
+# Dashboard
+@app.route("/dashboard")
+def dashboard():
     username = session.get("username")
     email = session.get("email")
-    return render_template("index.html", username=username, email=email)
+    return render_template("dashboard.html", username=username, email=email)
 
 
 # Login
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    session.clear()
     if request.method == "POST":
         email = request.form.get("email")
         username = request.form.get("username")
@@ -68,16 +77,17 @@ def login():
 
         if not user:
             user = User.query.filter_by(username=username).first()
+            flash("User not found, don't have an account? Sign up")
     
         if user and password_correct:
             session["user_id"] = user.id
             flash("You have been logged in successfully.")
             session["username"] = user.username
             session["email"] = user.email
-            return redirect(url_for('index'))
+            return redirect(url_for('dashboard'))
         
         else:
-            flash("Invalid email/username or password.")
+            flash("Invalid email or password.")
             return redirect(url_for('login'))
         
     else:
@@ -87,7 +97,6 @@ def login():
 # Register
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    session.clear()
     if request.method == "POST":
 
         # Ensure email, username, password, and confirmation are submitted
@@ -127,6 +136,58 @@ def logout():
     session.clear()
     # Redirect user to login form
     return redirect("/login")
+
+
+
+@app.route("/subscribe", methods=["GET", "POST"])
+def subscribe():
+    if request.method == "GET":
+        user_id = request.args.get("user_id")
+        print(user_id)
+
+        # Validate the username
+        if not user_id:
+            flash("Invalid subscription request")
+            return redirect(url_for("subscribe"))
+
+        # Retrieve the user details using the username
+        user = User.query.filter_by(username=user_id).first()
+        if not user:
+            flash("Invalid user")
+            return redirect(url_for("subscribe"))
+        
+        # Render the subscription page template for GET requests
+        return render_template("subscription.html", user_id=user_id)
+    
+    elif request.method == "POST":
+        email = request.form.get("email")
+        user_id = request.form.get("user_id")
+
+         # Validate the username
+        if not email or not user_id:
+            flash("Invalid subscription request")
+            return redirect(url_for("subscribe"))
+
+        # Retrieve the user details using the username
+        user = User.query.filter_by(username=user_id).first()
+        if not user:
+            flash("Invalid user")
+            return redirect(url_for("subscribe"))
+
+        # Create a new instance of your Subscriber model and set the email field and any other relevant fields
+        subscriber = Subscriber(email=email, user_id=user.id)
+        # Store the subscriber in the database
+        db.session.add(subscriber)
+        db.session.commit()
+        session["user_id"] = user_id
+        return redirect(url_for("subscribed"))
+
+
+@app.route("/subscribed")
+def subscribed():
+    user_id = session.get("user_id")  # Access user_id from the URL parameter
+    return render_template("subscribed.html", user_id=user_id)
+
 
 
 
